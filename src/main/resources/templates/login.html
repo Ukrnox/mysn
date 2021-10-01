@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <link media="all" rel="stylesheet" th:href="@{/css/login_reg.css}" type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <a style="text-align: left;" href="http://localhost/reg" class="btn">Registration</a>
+    <div style="text-align: center;"><h1> Login</h1></div>
+    <hr>
+    <label> <b>Login:</b> </label>
+    <input type="text" id="email" placeholder="Email" size="15" required/>
+    <label><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" required>
+    <p class="result" style="text-align: center; color: brown"></p><br>
+    <button onclick="login('http://localhost/auth/login')" class="btn">Login</button>
+</div>
+</body>
+<script>
+    async function login(url) {
+        let email = document.querySelector('#email');
+        let password = document.querySelector('#password');
+        let result = document.querySelector('.result');
+        if (email.value.length !== 0 &&
+            password.value.length !== 0) {
+            const data = JSON.stringify(
+                {
+                    "email": email.value,
+                    "password": password.value,
+                });
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: data
+            });
+            if (response.ok) {
+                response.json().then(data => {
+                       console.log(data);
+                    let email = data['email'];
+                    let token = data['token'];
+                    console.log(email + ' ' + token);
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('token', token);
+                        // window.location = 'http://localhost/main';
+
+                    // fetch('http://localhost/main', {
+                    //     method: 'GET',
+                    //     headers: {
+                    //         'Authorization': token
+                    //     },
+                    // });
+                }).catch(console.error);
+                // console.log(email + ' --- ' + token);
+                // window.alert(commits[0].value)
+                // window.location.href = 'localhost/main?toke='+response.body;
+                // console.log('Done ' + commits[1]);
+                // console.log(commits.length);
+            } else {
+                result.innerHTML = '' + (await response.text()).valueOf();
+                console.log('Network request failed with response ' + response.status + ': ' + response.body.toString());
+            }
+        } else alert("You need to fill in all the fields");
+        getSecret();
+    }
+
+    function getSecret() {
+        var url = "http://localhost/main"
+        var xhr = new XMLHttpRequest();
+        var tokenElement = document.getElementById('token');
+        var resultElement = document.getElementById('result');
+        xhr.open('GET', url, true);
+        xhr.setRequestHeader("Authorization",  localStorage.getItem('token'));
+        xhr.send(null);
+    }
+</script>
+</html>

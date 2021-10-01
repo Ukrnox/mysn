@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link media="all" rel="stylesheet" th:href="@{/css/login_reg.css}" type="text/css"/>
+</head>
+<body>
+    <div class="container">
+        <a style="text-align: left;" href="http://localhost/login" class="btn">Login</a>
+        <div style="text-align: center;"><h1>Registration Form</h1></div>
+        <!--        <center><h1>Registration Form</h1></center>-->
+        <hr>
+        <label> <b>Firstname:</b> </label>
+        <input type="text" id="name" placeholder="Firstname" size="15" required/>
+        <label> <b>Middle name:</b> </label>
+        <input type="text" id="middlename" placeholder="Middlename" size="15" required/>
+        <label> <b>Lastname:</b> </label>
+        <input type="text" id="lastname" placeholder="Lastname" size="15" required/>
+
+        <div>
+            <label>
+                Gender :
+            </label><br>
+            <input type="radio" value="Male" name="gender" checked> Male
+            <input type="radio" value="Female" name="gender"> Female
+            <input type="radio" value="Other" name="gender"> Other
+        </div>
+        Current Address :
+        <textarea cols="80" rows="5" placeholder="Current Address" id="address" required>
+</textarea>
+        <label><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" id="email" required>
+
+        <label><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" id="password" required>
+
+        <label><b>Re-type Password</b></label>
+        <input type="password" placeholder="Retype Password" id="repeatedPassword" required>
+        <br>
+        <p class="result" style="text-align: center; color: brown"></p><br>
+        <button onclick="postNewUser('http://localhost/reg')" class="btn">Register</button>
+        <!--    <button type="submit" class="btn">Login</button>-->
+    </div>
+</body>
+<script>
+    async function postNewUser(url) {
+        let name = document.querySelector('#name');
+        let lastname = document.querySelector('#lastname');
+        let middlename = document.querySelector('#middlename');
+        let genders = document.getElementsByName('gender');
+        let gender;
+        for (let i=0;i<genders.length; i++) {
+            if (genders[i].checked) {
+                gender = genders[i];
+            }
+        }
+        let email = document.querySelector('#email');
+        let address = document.querySelector('#address');
+        let password = document.querySelector('#password');
+        let repeatedpassword = document.querySelector('#repeatedPassword');
+        let result = document.querySelector('.result');
+        // xhr.open("POST", url, true);
+        // xhr.setRequestHeader("Content-Type", "application/json");
+        // window.alert("pp" + name.value.length);
+    // && lastname.value.length !== 0 &&
+    //     middlename.value.length !== 0 && email.value.length !== 0 &&
+    //     password.value.length !== 0 && repeatedPassword.value.length !== 0
+        if (name.value.length !== 0 &&
+            lastname.value.length !== 0 &&
+            middlename.value.length !== 0 &&
+            email.value.length !== 0 &&
+            password.value.length !== 0 &&
+            address.value.length !== 0 &&
+            repeatedpassword.value.length !== 0) {
+            const data = JSON.stringify(
+                {
+                    "name": name.value,
+                    "lastName": lastname.value,
+                    "middleName": middlename.value,
+                    "gender": gender.value,
+                    "email": email.value,
+                    "address": address.value,
+                    "password": password.value,
+                    "repeatedPassword": repeatedpassword.value,
+                });
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: data
+            });
+            // var myFetch = fetch(url);
+            //
+            // myFetch.then(function(response) {
+            //     response.text().then(function(text) {
+            //         poemDisplay.textContent = text;
+            //     });
+            // });
+            if (response.ok) {
+                window.location.href = 'localhost/login';
+                console.log('Done ' + response.status);
+            } else {
+                result.innerHTML = '' + await response.text();
+                console.log('Network request failed with response ' + response.status + ': ' + response.body.toString());
+            }
+        } else alert("You need to fill in all the fields");
+    }
+</script>
+</html>

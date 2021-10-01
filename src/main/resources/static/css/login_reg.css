@@ -1,0 +1,42 @@
+body{
+    font-family: Calibri, Helvetica, sans-serif;
+    background-color: #c8eeee;
+}
+.container {
+    padding: 50px;
+    background-color: #3ab7c2;
+}
+
+input[type=text], input[type=password], textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: yellow;
+    outline: none;
+}
+div {
+    padding: 10px 0;
+}
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+.btn {
+    background-color: yellow;
+    color: black;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 103%;
+    opacity: 0.9;
+}
+.btn:hover {
+    opacity: 1;
+}

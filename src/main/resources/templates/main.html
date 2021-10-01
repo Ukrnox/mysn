@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url("../static/css/main.css");
+        @import url("../static/css/btns.css");
+    </style>
+    <link media="all" rel="stylesheet" th:href="@{/css/btns.css}" type="text/css"/>
+    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css"/>
+</head>
+<body>
+
+<div class="header">
+    <h1>My Website</h1>
+    <p>Resize the browser window to see the effect.</p>
+</div>
+
+<div class="topnav">
+    <a href="#">Home</a>
+    <a href="#">Search</a>
+    <a href="#" style="float:right">Exit</a>
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>TITLE HEADING</h2>
+            <h5>Title description, Dec 7, 2017</h5>
+            <div class="fakeimg" style="height:200px;">Image</div>
+            <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
+        <div class="card">
+            <h2>TITLE HEADING</h2>
+            <h5>Title description, Sep 2, 2017</h5>
+            <div class="fakeimg" style="height:200px;">Image</div>
+            <p>Some text..</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        </div>
+    </div>
+    <div class="rightcolumn">
+        <div class="card">
+            <h2 align="center">My photo</h2>
+<!--            <div class="fakeimg" style="height:100px;">Image</div>-->
+            <img class="img" src="../static/img/dog.jpg" alt="Photo" width="300" height="300">
+        </div>
+
+        <div class="card">
+            <h3 align="center">My friends</h3>
+            <div class="fakeimg"><p>Image</p></div>
+            <div class="fakeimg"><p>Image</p></div>
+            <div class="fakeimg"><p>Image</p></div>
+            <button class="btn btn2" href="#">All friends</button>
+        </div>
+        <div class="card">
+            <h3>HZ</h3>
+            <p>Coming soon</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <h2>Footer</h2>
+</div>
+
+</body>
+</html>
